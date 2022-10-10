@@ -1,0 +1,33 @@
+#calcBody {
+    background-color: gray;
+    border: black solid 4px;
+    height: 400px;
+    width: 300px;
+    display: flex;
+    flex-flow: center;
+    flex-direction: column;
+}
+
+#history {
+    background-color: green;
+    height: 50px;
+    width: 100%;
+}
+
+#pads {
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#numPad {
+    background-color: red;
+    height: 100%;
+}
+
+#opPad {
+    background-color: blue;
+    height: 100%;
+}
