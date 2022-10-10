@@ -11,7 +11,12 @@
 #display {
     background-color: green;
     height: 70px;
-    width: 100%;
+    width: 295px;
+    border-bottom: black solid 4px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 5px;
 }
 
 #pads {
