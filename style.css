@@ -17,7 +17,7 @@
 #pads {
     background-color: orange;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
     width: 100%;
 }
@@ -25,9 +25,11 @@
 #numPad {
     background-color: red;
     height: 100%;
+    flex-grow: 8;
 }
 
 #opPad {
     background-color: blue;
     height: 100%;
+    flex-grow: 1;
 }
