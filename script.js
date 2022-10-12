@@ -33,11 +33,14 @@ function operate(o,x,y) {
 
 function display(button) {
     const buttonText = this.innerText;
-    let displayText = document.querySelector("#display");
+    let displayText = document.querySelector("#histogram");
     displayText.innerText += buttonText;
 }
 
-
+function startOperation(button) {
+    const displayText = document.querySelector("#histogram");
+    
+}
 
 function hookButtons() {
     const allButtons = document.querySelectorAll("button");
@@ -48,7 +51,9 @@ function hookButtons() {
         button.addEventListener("click", display);
     }
 
-
+    for (button of operatorButtons) {
+        button.addEventListener("click",startOperation);
+    }
 }
 
 hookButtons();

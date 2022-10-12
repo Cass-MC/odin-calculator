@@ -1,22 +1,27 @@
 #calcBody {
     background-color: gray;
     border: black solid 4px;
-    height: 320px;
+    height: 420px;
     width: 300px;
     display: flex;
     flex-flow: center;
     flex-direction: column;
 }
 
-#display {
+#histogram {
     background-color: pink;
     height: 50px;
-    width: 295px;
-    border-bottom: black solid 4px;
+    border-bottom: black solid 2px;
     display: flex;
     justify-content: right;
     align-items: center;
     padding-right: 5px;
+}
+
+#currentOperation {
+    background-color: orange;
+    height: 50px;
+    border-bottom: black solid 4px;
 }
 
 #pads {
