@@ -10,7 +10,7 @@
 
 #histogram {
     background-color: pink;
-    height: 50px;
+    height: 30px;
     border-bottom: black solid 2px;
     display: flex;
     justify-content: right;
