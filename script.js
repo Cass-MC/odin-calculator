@@ -30,3 +30,25 @@ function operate(o,x,y) {
             break;
     }
 }
+
+function display(button) {
+    const buttonText = this.innerText;
+    let displayText = document.querySelector("#display");
+    displayText.innerText += buttonText;
+}
+
+
+
+function hookButtons() {
+    const allButtons = document.querySelectorAll("button");
+    const operatorButtons = document.querySelectorAll(".operator");
+
+    for (button of allButtons) {
+        if (button.innerText === "Clear") { continue; }
+        button.addEventListener("click", display);
+    }
+
+
+}
+
+hookButtons();
