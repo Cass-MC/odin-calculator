@@ -22,6 +22,10 @@
     background-color: orange;
     height: 50px;
     border-bottom: black solid 4px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 5px;
 }
 
 #pads {

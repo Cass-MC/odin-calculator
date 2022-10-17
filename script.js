@@ -1,4 +1,5 @@
 let histogramText = document.querySelector("#histogram");
+let currentOp = document.querySelector("#currentOperation");
 hookButtons();
 
 function add(x,y) {
@@ -41,9 +42,14 @@ function display(button) {
     if (histogramText.innerText.length > 0) { 
         stopDuplicateOp = stopDuplicateOperations(buttonText, histogramText.innerText); 
     }
-    if (stopDuplicateOp) { return; }
+    if (stopDuplicateOp) {
+        const updateOperation = String(histogramText.innerText)
+                                    .substring(0, histogramText.innerText.length - 1);
+        histogramText.innerText = updateOperation + buttonText;
+     }
     else { histogramText.innerText += buttonText; }
 
+     currentOp.innerText = startOperation(button);
 }
 
 function stopDuplicateOperations(buttonText, histogramText) {
@@ -59,7 +65,15 @@ function stopDuplicateOperations(buttonText, histogramText) {
 }
 
 function startOperation(button) {
-    //hang on.
+    const operationsReg = /[\+\-\*\/]/g;
+
+    //only works the first time..
+    if ((histogramText.innerText.match(operationsReg) || []).length == 2) {
+        let operation = histogramText.innerText.match(operationsReg)[0];
+        let nums = histogramText.innerText.match(/\d+/g);
+        console.log(nums);
+        return operate(operation, nums[0], nums[1]);
+    }
 }
 
 function hookButtons() {
@@ -70,6 +84,6 @@ function hookButtons() {
         button.addEventListener("click", display);
     }
     for (button of operatorButtons) {
-        button.addEventListener("click",startOperation);
+        //button.addEventListener("click",startOperation);
     }
 }
