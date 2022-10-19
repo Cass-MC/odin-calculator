@@ -66,27 +66,38 @@ function stopDuplicateOperations(buttonText, histogramText) {
 }
 
 function midOperation(button) {
-    histoNumbers = histogramText.innerText.match(/\d+/g);
-    histoOperations = histogramText.innerText.match(operationsReg); 
-    //Set up currentOp if there's enough data to do an operation
+    let histoNumbers = histogramText.innerText.match(/\d+/g);
+    let histoOperations = histogramText.innerText.match(operationsReg); 
+
+    
+    //Set up currentOp if there's enough data to do a mid-sequence operation
     if (currentAnswer === 0 && histoOperations.length === 2) {
         const op = histoOperations[histoOperations.length-2];
         const num1 = Number(histoNumbers[histoNumbers.length-2]);
         const num2 = Number(histoNumbers[histoNumbers.length-1]);
         currentAnswer = operate(op, num1, num2);  
     }
+    else if (this.innerText === "=") {
+        const op = histoOperations[histoOperations.length-1];
+        const num1 = Number(histoNumbers[histoNumbers.length-2]);
+        const num2 = Number(histoNumbers[histoNumbers.length-1]);
+        currentAnswer = operate(op, num1, num2);
+        currentOpText.innerText = currentAnswer;
+        return;
+    }
     //Once there's enough data to work with, work with it.
-    else if (histoOperations.length >= 3) {
+    else if (histoOperations.length >= 3 && this.innerText !== "=") {
         //last operation, last number
         const op = histoOperations[histoOperations.length-2];
         const num2 = Number(histoNumbers[histoNumbers.length-1]);
         currentAnswer = operate(op, currentAnswer, num2);
+        console.log("ran last if");
     }
     currentOpText.innerText = currentAnswer;
 }
 
 function submit() {
-
+    //if (histoOperations.length >= 1) {}
 }
 
 function hookButtons() {
@@ -94,7 +105,7 @@ function hookButtons() {
     const operatorButtons = document.querySelectorAll(".operator");
     for (button of allButtons) {
         if (button.innerText === "Clear") { continue; }
-        if (button.innerText === "=") { button.addEventListener("click", submit); }
+        if (button.innerText === "=") { button.addEventListener("click", midOperation); continue; }
         button.addEventListener("click", display);
     }
     for (button of operatorButtons) {
