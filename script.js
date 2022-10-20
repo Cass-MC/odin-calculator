@@ -37,78 +37,42 @@ function operate(o,x,y) {
     }
 }
 
-function display(button) {
-    const buttonText = this.innerText;
-    let stopDuplicateOp = false;
+function updateHistogram(button) {
+    if (stopDuplicateOperations) {
+        //change the histogram to have the new operation
+    }
 
-    if (histogramText.innerText.length > 0) { 
-        stopDuplicateOp = stopDuplicateOperations(buttonText, histogramText.innerText); 
+    if (midOperation) {
+        //go to doOperation
     }
-    if (stopDuplicateOp) {
-        const updateOperation = String(histogramText.innerText)
-                                    .substring(0, histogramText.innerText.length - 1);
-        histogramText.innerText = updateOperation + buttonText;
-     }
-    else { 
-        histogramText.innerText += buttonText;
+    else {
+        //just update histogram
     }
+
 }
 
 function stopDuplicateOperations(buttonText, histogramText) {
-    const lastButtonChar = String(buttonText)
-                            .charAt(buttonText.length - 1);
-    const lastDisplayChar = String(histogramText)
-                            .charAt(histogramText.length - 1);
-    if (lastButtonChar.match(operationsReg) && lastDisplayChar.match(operationsReg)) {
-        return true;
-    }
-    else { return false; }
+
 }
 
-function midOperation(button) {
-    let histoNumbers = histogramText.innerText.match(/\d+/g);
-    let histoOperations = histogramText.innerText.match(operationsReg); 
+function midOperation() {
 
-    
-    //Set up currentOp if there's enough data to do a mid-sequence operation
-    if (currentAnswer === 0 && histoOperations.length === 2) {
-        const op = histoOperations[histoOperations.length-2];
-        const num1 = Number(histoNumbers[histoNumbers.length-2]);
-        const num2 = Number(histoNumbers[histoNumbers.length-1]);
-        currentAnswer = operate(op, num1, num2);  
-    }
-    else if (this.innerText === "=") {
-        const op = histoOperations[histoOperations.length-1];
-        const num1 = Number(histoNumbers[histoNumbers.length-2]);
-        const num2 = Number(histoNumbers[histoNumbers.length-1]);
-        currentAnswer = operate(op, num1, num2);
-        currentOpText.innerText = currentAnswer;
-        return;
-    }
-    //Once there's enough data to work with, work with it.
-    else if (histoOperations.length >= 3 && this.innerText !== "=") {
-        //last operation, last number
-        const op = histoOperations[histoOperations.length-2];
-        const num2 = Number(histoNumbers[histoNumbers.length-1]);
-        currentAnswer = operate(op, currentAnswer, num2);
-        console.log("ran last if");
-    }
-    currentOpText.innerText = currentAnswer;
 }
 
-function submit() {
-    //if (histoOperations.length >= 1) {}
+function doOperation(button) {
+
 }
+
 
 function hookButtons() {
     const allButtons = document.querySelectorAll("button");
     const operatorButtons = document.querySelectorAll(".operator");
     for (button of allButtons) {
         if (button.innerText === "Clear") { continue; }
-        if (button.innerText === "=") { button.addEventListener("click", midOperation); continue; }
-        button.addEventListener("click", display);
+        if (button.innerText === "=") { button.addEventListener("click", doOperation); continue; }
+        button.addEventListener("click", updateHistogram);
     }
     for (button of operatorButtons) {
-        button.addEventListener("click",midOperation);
+        button.addEventListener("click",doOperation);
     }
 }
