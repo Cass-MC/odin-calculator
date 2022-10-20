@@ -40,14 +40,15 @@ function operate(o,x,y) {
 function updateHistogram(button) {
     if (checkDuplicateOperations(this.innerText)) {
         histogramText.innerText = histogramText.innerText.replace(/.$/,this.innerText);
+        return;
     }
     else {
         histogramText.innerText += this.innerText;
     }
 
-    if (midOperation(this.innerText)) {
+    if (midOperation()) {
         //go to doOperation
-        
+        console.log("op");
     }
     
 }
@@ -61,7 +62,10 @@ function checkDuplicateOperations(buttonText) {
     return false;
 }
 
-function midOperation(buttonText) {
+function midOperation() {
+    const histoNums = histogramText.innerText.match(/\d+/g);
+    if (histoNums.length === 1) { return false; }
+    if (histogramText.innerText.slice(-1).match(operationsReg)) { return true; }
     return false;
 }
 
