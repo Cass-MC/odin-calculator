@@ -39,16 +39,15 @@ function operate(o,x,y) {
 
 function updateHistogram(button) {
     if (checkDuplicateOperations(this.innerText)) {
-        //change the histogram to have the new operation
-        console.log("Is duplicate");
+        histogramText.innerText = histogramText.innerText.replace(/.$/,this.innerText);
+    }
+    else {
+        histogramText.innerText += this.innerText;
     }
 
     if (midOperation(this.innerText)) {
         //go to doOperation
-    }
-    else {
-        //just update histogram
-        histogramText.innerText += this.innerText;
+        
     }
     
 }
